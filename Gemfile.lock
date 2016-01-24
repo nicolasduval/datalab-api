@@ -44,6 +44,10 @@ GEM
     byebug (8.2.1)
     codeclimate-test-reporter (0.4.8)
       simplecov (>= 0.7.1, < 1.0.0)
+    codecov (0.1.4)
+      json
+      simplecov
+      url
     coderay (1.1.0)
     concurrent-ruby (1.0.0)
     connection_pool (2.2.0)
@@ -171,6 +175,7 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    url (0.3.2)
     web-console (2.2.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -183,6 +188,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   codeclimate-test-reporter
+  codecov
   factory_girl_rails (~> 4.0)
   mongo_mapper
   mongoid (~> 4.0.2)
