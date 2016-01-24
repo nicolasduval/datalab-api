@@ -1,0 +1,14 @@
+development:
+  sessions:
+    default:
+      database: datalab-dev
+      hosts:
+        - localhost:27017
+
+test:
+  sessions:
+    default:
+      database: datalab-test
+      hosts:
+        - localhost:27017
+
