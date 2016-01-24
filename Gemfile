@@ -6,6 +6,7 @@ gem 'mongoid', '~>  4.0.2'
 gem 'mongo_mapper'
 gem "codeclimate-test-reporter", group: :test, require: nil
 gem 'codecov', :require => false, :group => :test
+gem "figaro"
 
 group :development, :test do
   gem 'byebug'
@@ -14,7 +15,6 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec'
   gem 'rspec-rails'
-  # https://github.com/mongoid-rspec/mongoid-rspec
   gem "mongoid-rspec"
   gem "factory_girl_rails", "~> 4.0"
 end

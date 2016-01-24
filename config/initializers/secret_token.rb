@@ -16,4 +16,4 @@
 # Using secret_token for rails3 compatibility. Change to secret_key_base
 # to avoid deprecation warning.
 # Can be safely removed in a rails3 api-only application.
-DatalabApi::Application.config.secret_token = 'a7b0c13f982ddbd42f06c4e454d25bfa5984fc75fa7cc6375d36600e2279e3e70324bc2645df399872a29dc082f35e633564b525cfc663e864181d9bfc0867de'
+DatalabApi::Application.config.secret_token = ENV['secret_token']
