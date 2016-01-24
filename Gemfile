@@ -5,6 +5,7 @@ gem 'rails-api', '0.4.0'
 gem 'mongoid', '~>  4.0.2'
 gem 'mongo_mapper'
 gem "codeclimate-test-reporter", group: :test, require: nil
+gem 'codecov', :require => false, :group => :test
 
 group :development, :test do
   gem 'byebug'
