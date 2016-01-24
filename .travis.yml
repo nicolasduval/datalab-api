@@ -7,3 +7,7 @@ services:
   - mongodb
 
 script: "bundle exec rspec spec"
+
+addons:
+    code_climate:
+        repo_token: ccc8d7773568a3153abc015f4cc8ae7e16ddabdfc106d5ad77c03f675184e113
