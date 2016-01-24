@@ -176,11 +176,11 @@ DEPENDENCIES
   byebug
   factory_girl_rails (~> 4.0)
   mongo_mapper
-  mongoid
+  mongoid (~> 4.0.2)
   mongoid-rspec
   pry-rails
   rails (= 4.2.4)
-  rails-api
+  rails-api (= 0.4.0)
   rspec
   rspec-rails
   spring

@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
-gem 'rails-api'
-gem "mongoid"
+gem 'rails-api', '0.4.0'
+gem 'mongoid', '~>  4.0.2'
 gem 'mongo_mapper'
 
 group :development, :test do

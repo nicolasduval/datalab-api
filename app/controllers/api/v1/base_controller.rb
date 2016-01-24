@@ -29,7 +29,7 @@ module Api
 
       private
 
-      def models(parent = nil)
+      def models()
         model_paths = Dir["#{Rails.root}/app/models/**/*.rb"]
         sanitized_model_paths = model_paths.map { |path| path.gsub(/.*\/app\/models\//, '').gsub('.rb', '') }
         return sanitized_model_paths.each{|model| model.capitalize!}
