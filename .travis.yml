@@ -6,4 +6,4 @@ rvm:
 services:
   - mongodb
 
-script: script: "bundle exec rspec spec"
+script: "bundle exec rspec spec"
