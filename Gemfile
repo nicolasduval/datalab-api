@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.4'
 gem 'rails-api', '0.4.0'
-gem "codeclimate-test-reporter", group: :test, require: nil
-# gem 'codecov', :require => false, :group => :test
 gem "figaro"
 
 group :production do

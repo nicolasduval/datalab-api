@@ -3,17 +3,14 @@ rvm:
  - "2.0.0"
  - "2.2.0"
 
-addons:
-  postgresql: "9.3"
+env:
+  - DB=sqlite
+  - DB=mysql
+  - DB=postgresql
 
-services:
-  - postgresql
+script:
+  - bundle exec rake --trace db:migrate test
+  - bundle exec rspec spec
 
 before_script:
-  - cp config/database.yml.travis config/database.yml
-
-script: "bundle exec rspec spec"
-
-addons:
-    code_climate:
-        repo_token: ccc8d7773568a3153abc015f4cc8ae7e16ddabdfc106d5ad77c03f675184e113
+  - psql -c 'create database datalab_api_test' -U postgres
