@@ -17,10 +17,6 @@ Ruby 2.0 or greater
 
 ## Installation
 * Clone the repository.   
-* Make sure you have mongoDB installed. 
-
-  `$ brew install mongodb`
-
 * Run bundle to install dependencies.  
  
    `$ bundle install`
