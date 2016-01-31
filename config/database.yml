@@ -3,17 +3,11 @@ sqlite: &sqlite
   adapter: sqlite3
   database: db/<%= Rails.env %>.sqlite3 
 
-mysql: &mysql
-  adapter: mysql2
-  username: root
-  password:
-  database: dalab_api_<%= Rails.env %>
-
 postgresql: &postgresql
   adapter: postgresql
   username: postgres
-  password:
   database: datalb_api_<%= Rails.env %>
+  password: 
 
 defaults: &defaults
   pool: 5
@@ -29,5 +23,3 @@ test:
 
 production:
   <<: *defaults
-  password: <%= ENV['production_db_password'] %>
-
