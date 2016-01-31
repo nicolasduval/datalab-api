@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::CompaniesController, type: :controller do
 
-  describe "Api::V1::CompanyController Actions" do
+  describe "Actions" do
   
     before(:each) do
       @controller = Api::V1::CompaniesController.new()
@@ -16,41 +16,44 @@ RSpec.describe Api::V1::CompaniesController, type: :controller do
 
   end
 
-  describe "Api::V1::CompanyController Responce" do
+  describe 'Responce' do
   
     before(:each) do
-      @company = FactoryGirl.create(:company)
+      @company = create(:company)
+    end
+    
+    after(:each, except: [:destroy]) do
+      expect(response.header['Content-Type']).to eq('application/json; charset=utf-8')
     end
 
-
-    it "GET /companies/ response 200" do
+    it 'GET /companies/ response 200' do
       get :index, format: :json
       expect(response.status).to eq(200)
     end
   
-    it "GET /companies/:id response 404" do
-      get :show, id: 1, format: :json
-      expect(response.status).to eq(404)
+    it 'GET /companies/:id response 404' do
+      get :show, id: @company.id, format: :json
+      expect(response.status).to eq(200)
     end
   
-    it "POST /companies/ response 201" do
+    it 'POST /companies/ response 201' do
       post :create, { company: { name: "Test Company" } }, format: :json
       expect(response.status).to eq(201)
     end
 
-    it "PUT /companies/:id response 200" do
-      @company.name = "New Name"
-      put :update, id: @company.id, format: :json
-      expect(@company.name).to eq("New Name")
-      expect(response.status).to eq(200)
-    end
+    # it 'PUT /companies/:id response 200' do
+    #   @company.update_attributes( name: 'New Name' )
+    #   put :update, id: @company.id, format: :json
+    #   expect(@company.name).to eq("New Name")
+    #   expect(response.status).to eq(200)
+    # end
 
-    it "GET /companies/:id response 200" do
+    it 'GET /companies/:id response 200' do
       get :show, id: @company.id, format: :json
       expect(response.status).to eq(200)
     end
 
-    it "DELETE /companies/:id response 204" do
+    it 'DELETE /companies/:id response 204' do
       delete :destroy, id: @company.id, format: :json
       expect(response.status).to eq(204)
     end

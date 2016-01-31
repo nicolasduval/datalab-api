@@ -21,10 +21,23 @@ require 'rspec/rails'
 #
 # Dir[Rails.root.join('spec/requests/**/*.rb')].each { |f| require f }
 
+# Checks for pending migrations before tests are run.
+# If you are not using ActiveRecord, you can remove this line.
+ActiveRecord::Migration.maintain_test_schema!
+
+
 RSpec.configure do |config|
-  config.include Mongoid::Matchers, type: :model
   config.include FactoryGirl::Syntax::Methods
-  # config.include Requests::JsonHelpers, type: :request
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
 
   # config.before do
   #   FactoryGirl.find_definitions
@@ -43,4 +56,11 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
 end
