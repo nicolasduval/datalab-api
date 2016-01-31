@@ -13,6 +13,11 @@ module Api
 
 
       #GET /api/companies/:id
+      def new
+        @company = Company.new()
+      end
+
+      #GET /api/companies/:id
       def show
         if @company
           respond_data(@company, 200)

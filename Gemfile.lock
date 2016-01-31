@@ -41,18 +41,11 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.1)
-    codeclimate-test-reporter (0.4.8)
-      simplecov (>= 0.7.1, < 1.0.0)
-    codecov (0.1.4)
-      json
-      simplecov
-      url
     coderay (1.1.0)
     concurrent-ruby (1.0.0)
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
-    docile (1.1.5)
     erubis (2.7.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -141,11 +134,6 @@ GEM
     rspec-support (3.2.2)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
-    simplecov (0.11.1)
-      docile (~> 1.1.0)
-      json (~> 1.8)
-      simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.0)
     slop (3.6.0)
     spring (1.6.2)
     sprockets (3.5.2)
@@ -160,7 +148,6 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    url (0.3.2)
     web-console (2.2.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -172,8 +159,6 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  codeclimate-test-reporter
-  codecov
   database_cleaner
   factory_girl_rails (~> 4.0)
   figaro

@@ -12,6 +12,11 @@ module Api
       end
 
       #GET /api/projects/:id
+      def new
+        @project = Project.new()
+      end
+
+      #GET /api/projects/:id
       def show
         if @project
           respond_data(@project, 200)
