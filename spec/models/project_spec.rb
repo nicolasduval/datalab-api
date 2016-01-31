@@ -1,40 +1,55 @@
 require 'rails_helper'
 
 RSpec.describe Project, type: :model do
+  
+  before(:each) do
+     @company = create(:company)
+     @project = create(:project, company_id: @company.id)
+  end
 
+
+  describe 'Relations' do
+    it 'belongs_to company' do
+      expect(@project.company.id).to be @company.id
+    end
+
+    it 'has a company name' do
+      expect(@project.company.zip_code).to eq '1050'
+    end
+
+  end
+  
   describe "Attributes" do
-    it { is_expected.to be_dynamic_document }
-    it { is_expected.to be_timestamped_document }
-    it { is_expected.to have_field(:name) }
-    it { is_expected.to have_field(:company_id) }
+    
+    it 'has a name attributes' do 
+      expect(@project).to have_attributes name: "my_project"
+    end
+
+    it 'has a name attributes' do 
+      expect(@project).to have_attributes company_id: @company.id
+    end
+
   end
 
-  describe "Assosiations" do
-    it { is_expected.to belong_to(:company) }
-  end
+  describe "Validation" do
 
-  describe "Object" do
-
-    before(:each) do
-       @project = FactoryGirl.create(:project)
+    it "name should be present" do
+      expect(@project).to validate_presence_of :name
     end
 
-    it "has name" do
-      expect(@project).to have_attributes(name: "my_project")
+    it 'validates the associated company' do
+      expect(@project).to belong_to(:company)
     end
 
-    it "add attributes" do
-      @project.add_attributes( [{ frame_rate: "24" }] )
-      expect(@project.frame_rate).to eq("24")
-      expect(@project).to have_attributes({ frame_rate: "24" })
+    it "company_id should be present" do
+      expect(@project).to validate_presence_of :company_id
     end
 
-    it "remove attributes" do
-      @project.add_attributes( [{ color_space: "P3" }] )
-      @project.color_space
-      @project.remove_attributes(["color_space"])
-      expect(@project).not_to have_attributes({ color_space: "P3" })
+    it "should not be valid" do
+      @project = Project.new name: nil
+      expect(@project).to_not be_valid
     end
+
 
   end
 

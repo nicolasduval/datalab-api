@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::ProjectsController, type: :controller do
 
-  describe "Api::V1::ProjectsController Actions" do
+  describe "Actions" do
   
     before(:each) do
       @controller = Api::V1::ProjectsController.new()
@@ -16,35 +16,38 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
 
   end
 
-  describe "Api::V1::ProjectsController Responce" do
+  describe 'Responce' do
 
     before(:each) do
-      @project = FactoryGirl.create(:project)
-      @company = FactoryGirl.create(:company)
+      @company  = create(:company)
+      @project  = create(:project, company_id: @company.id)
+      @projects = create_list(:project, 2, company_id: @company.id)
     end
 
+    after(:each, except: [:destroy]) do
+      expect(response.header['Content-Type']).to eq('application/json; charset=utf-8')
+    end
   
     it "GET /projects/ response 200" do
       get :index, format: :json
+      expect(@projects.count).to eq( 2 ) 
       expect(response.status).to eq(200)
     end
-  
-    it "GET /projects/:id response 404" do
-      get :show, id: 1, format: :json
-      expect(response.status).to eq(404)
-    end
+
   
     it "POST /projects/ response 201" do
-      post :create, { project: { name: "Test Project", company_id: @company.id } }, format: :json
+      params = { project: { name: "Project", company_id: @company.id } }
+      post :create, params , format: :json
       expect(response.status).to eq(201)
     end
 
-    it "PUT /projects/:id response 200" do
-      @project.name = "New Name"
-      put :update, id: @project.id, format: :json
-      expect(@project.name).to eq("New Name")
-      expect(response.status).to eq(200)
+    it 'POST /projects/ response 400' do
+      post :create, { project: { name: "Project", company_id: nil } }, format: :json
+      expect(response.status).to eq 400
     end
+
+    # it "PUT /projects/:id response 200" do
+    # end
 
     it "GET /projects/:id response 200" do
       get :show, id: @project.id, format: :json

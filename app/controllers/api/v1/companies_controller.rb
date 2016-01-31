@@ -5,25 +5,23 @@ module Api
       
       before_action :find_company, only: [:show, :update, :destroy]
 
-      #GET /api/v1/companies/
+      #GET /api/companies/
       def index
-        @company = Company.all.to_a
+        @company = Company.all
         render json: @company
       end
 
 
-      #GET /api/v1/companies/:id
+      #GET /api/companies/:id
       def show
         if @company
-          #respond_data implemented ap1/v1/responce_helper.rb
           respond_data(@company, 200)
         else 
-          #respond_error implemented ap1/v1/responce_helper.rb
           respond_error("Record not Found.", 404)
         end
       end
 
-      #POST /api/v1/companies/
+      #POST /api/companies/
       def create
         @company = Company.new(companies_params)
         if @company.save
@@ -33,20 +31,26 @@ module Api
         end
       end
 
-      #PUT /api/v1/companies/:id
+      #PUT /api/companies/:id
       def update
+        @company.update_attributes(params[:company])
+        if @company
+          respond_data(@company, 200)
+        else
+          respond_error(@company.errors, 400)
+        end
       end
       
-      #DELETE /api/v1/companies/:id
+      #DELETE /apicompanies/:id
       def destroy
         if @company
           if @company.destroy
             head :no_content
           else
-            respond_error("Record not delete.", 400)
+            respond_error(@company.errors.full_messages, 400)
           end
         else
-          respond_error("Record not found.", 400)
+          respond_error(@company.errors.full_messages, 400)
         end
       end
 

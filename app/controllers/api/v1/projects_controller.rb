@@ -5,53 +5,51 @@ module Api
 
       before_action :find_project, only: [:show, :update, :destroy]
 
-      #GET /api/v1/projects
+      #GET /api/projects
       def index
-        @projects = Project.all.to_a
-        render json: @projects
+        @company = Company.last
+        respond_data(@company.projects, 200)
       end
 
-      #GET /api/v1/projects/:id
+      #GET /api/projects/:id
       def show
         if @project
           respond_data(@project, 200)
         else 
-          respond_error("Record not Found.", 404)
+          respond_error(@project.errors, 404)
         end
       end
 
-      #POST /api/v1/projects/
+      #POST /api/projects/
       def create
         @project = Project.new(projects_params)
-        @project.write_attributes(projects_params.merge(params[:project]))
         if @project.save
           respond_data(@project, 201)
         else
-          respond_error("Project not created.", 400)
+          respond_error(@project.errors, 400)
         end
       end
       
-      #PUT /api/v1/projects/:id
+      #PUT /api/projects/:id
       def update
         if @project
-          @project.update_document(params[:project])
-          @project.upsert
+          @project.update_attributes(params[:project])
           respond_data(@project, 200)
         else
-          respond_error("Record not Updated.", 400)
+          respond_error(@project.errors, 400)
         end
       end
 
-      #DELETE /api/v1/projects/:id
+      #DELETE /api/projects/:id
       def destroy
         if @project
           if @project.destroy
             head :no_content
           else
-            respond_error("Record not delete.", 400)
+            respond_error(@project.erros, 400)
           end
         else
-          respond_error("Record not found.", 400)
+          respond_error(@project.errors.full_massages, 400)
         end
       end
 
@@ -59,7 +57,8 @@ module Api
       private
 
       def projects_params
-        params.require(:project).permit(:name)
+        params.require(:project).permit(:name,:company_id,:frame_rate,:color_space,
+          :aspect_ratio,:resolution,:production,:supervisor,:sound_studio,:status)
       end
 
       def find_project
