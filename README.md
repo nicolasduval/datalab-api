@@ -2,10 +2,8 @@
 Post Production Management REST API.
  
 [![Build Status](https://travis-ci.org/nicolasduval/datalab-api.svg?branch=master)](https://travis-ci.org/nicolasduval/datalab-api)
-[![Code Climate](https://codeclimate.com/repos/56a4f702d5d7666c82001bf0/badges/7986633ce1b50c87cfe8/gpa.svg)](https://codeclimate.com/repos/56a4f702d5d7666c82001bf0/feed)
-[![Issue Count](https://codeclimate.com/repos/56a4f702d5d7666c82001bf0/badges/7986633ce1b50c87cfe8/issue_count.svg)](https://codeclimate.com/repos/56a4f702d5d7666c82001bf0/feed)
-[![Test Coverage](https://codeclimate.com/repos/56a4f702d5d7666c82001bf0/badges/7986633ce1b50c87cfe8/coverage.svg)](https://codeclimate.com/repos/56a4f702d5d7666c82001bf0/coverage)
-
+[![Code Climate](https://codeclimate.com/github/nicolasduval/datalab-api/badges/gpa.svg)](https://codeclimate.com/github/nicolasduval/datalab-api)
+[![Test Coverage](https://codeclimate.com/github/nicolasduval/datalab-api/badges/coverage.svg)](https://codeclimate.com/github/nicolasduval/datalab-api/coverage)
 ## Synopsis
 Comming soon.
 
