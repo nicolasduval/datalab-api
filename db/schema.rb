@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20160130153642) do
     t.string "full_address"
     t.string "zip_code"
     t.string "phone_number"
-    t.string "created_at",   default: "Sat, 30 Jan 2016 21:57:36 +0100"
-    t.string "updated_at",   default: "Sat, 30 Jan 2016 21:57:36 +0100"
+    t.string "created_at",   default: "Sun, 31 Jan 2016 18:12:16 +0100"
+    t.string "updated_at",   default: "Sun, 31 Jan 2016 18:12:16 +0100"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 20160130153642) do
     t.string  "sound_studio"
     t.string  "status"
     t.integer "company_id"
-    t.string  "created_at",   default: "Sat, 30 Jan 2016 21:57:36 +0100"
-    t.string  "updated_at",   default: "Sat, 30 Jan 2016 21:57:36 +0100"
+    t.string  "created_at",   default: "Sun, 31 Jan 2016 18:12:16 +0100"
+    t.string  "updated_at",   default: "Sun, 31 Jan 2016 18:12:16 +0100"
   end
 
 end

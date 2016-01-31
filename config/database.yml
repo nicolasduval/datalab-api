@@ -6,8 +6,7 @@ sqlite: &sqlite
 postgresql: &postgresql
   adapter: postgresql
   username: postgres
-  database: datalb_api_<%= Rails.env %>
-  password: 
+  database: datalab_api_<%= Rails.env %>
 
 defaults: &defaults
   pool: 5
