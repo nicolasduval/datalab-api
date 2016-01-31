@@ -1,7 +1,7 @@
-# require "codeclimate-test-reporter"
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
 # require 'simplecov'
 # require 'codecov'
-# CodeClimate::TestReporter.start
 # SimpleCov.start
 # SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
