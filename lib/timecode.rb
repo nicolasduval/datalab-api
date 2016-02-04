@@ -67,9 +67,6 @@ class Timecode
 
   end
 
-  def count_frames(frm_in, frm_out)
-    (frm_out - frm_in)
-  end
 
   def timecode(frames)
     

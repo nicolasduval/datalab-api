@@ -9,12 +9,54 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
     end
 
     it { expect(@controller).to respond_to(:index) }
+    it { expect(@controller).to respond_to(:new) }
     it { expect(@controller).to respond_to(:show) }
     it { expect(@controller).to respond_to(:create) }
     it { expect(@controller).to respond_to(:update) }
     it { expect(@controller).to respond_to(:destroy) }
 
   end
+
+  describe "Routing" do
+    before(:each) do
+      @version_api = 'api/v1'
+      @company  = create(:company)
+      @project  = create(:project, company_id: @company.id)
+    end    
+
+    it 'to routes index' do  
+      params = { format: 'json', controller: "#{@version_api}/projects", action: 'index' }
+      expect(:get => "/api/projects/").to route_to( params ) 
+    end
+
+    it 'to routes new' do  
+      params = { format: 'json', controller: "#{@version_api}/projects", action: 'new' }
+      expect(:get => "/api/projects/new").to route_to( params ) 
+    end
+
+    it 'to routes show' do  
+      params = { format: 'json', controller: "#{@version_api}/projects", action: 'show', id: @project.id.to_s }
+      expect(:get => "/api/projects/#{@project.id}").to route_to( params ) 
+    end
+
+    it 'to routes create' do  
+      params = { format: 'json', controller: "#{@version_api}/projects", action: 'create' }
+      expect(:post => "/api/projects/").to route_to( params ) 
+    end
+
+    it 'to routes update' do  
+      params = { format: 'json', controller: "#{@version_api}/projects", action: 'update', id: @project.id.to_s }
+      expect(:put => "/api/projects/#{@project.id}").to route_to( params ) 
+    end
+
+    it 'to routes destroy' do  
+      params = { format: 'json', controller: "#{@version_api}/projects", action: 'destroy', id: @project.id.to_s }
+      expect(:delete => "/api/projects/#{@project.id}").to route_to( params ) 
+    end
+
+  end
+
+
 
   describe 'Responce' do
 
@@ -31,19 +73,20 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
     it "GET /projects/ response 200" do
       get :index, format: :json
       expect(@projects.count).to eq( 2 ) 
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(200)
     end
 
   
     it "POST /projects/ response 201" do
       params = { project: { name: "Project", company_id: @company.id } }
       post :create, params , format: :json
-      expect(response.status).to eq(201)
+      expect(response).to have_http_status(201)
+      # expect(JSON.parse(response.body)['data']).to match( { name: "Project" } )
     end
 
     it 'POST /projects/ response 400' do
       post :create, { project: { name: "Project", company_id: nil } }, format: :json
-      expect(response.status).to eq 400
+      expect(response).to have_http_status(400)
     end
 
     # it "PUT /projects/:id response 200" do
@@ -51,12 +94,13 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
 
     it "GET /projects/:id response 200" do
       get :show, id: @project.id, format: :json
-      expect(response.status).to eq(200)
+      expect(response).to have_http_status(200)
+      expect(JSON.parse(response.body)['data']).to eq( @project.attributes )
     end
 
     it "DELETE /projects/:id response 204" do
       delete :destroy, id: @project.id, format: :json
-      expect(response.status).to eq(204)
+      expect(response).to have_http_status(204)
     end
 
 
