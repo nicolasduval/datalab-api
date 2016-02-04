@@ -8,14 +8,16 @@ Rails.application.routes.draw do
 
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       
-      # V1 BaseController
-      # put "create_attributes/:id" => "base#create_attributes"
-      # put "remove_attributes/:id" => "base#remove_attributes"
-
+      resources :users
       resources :projects
       resources :companies
 
     end
 
   end
+
+  scope '/api', defaults: {format: :json} do
+    mount_devise_token_auth_for 'User', at: '/auth'
+  end
+
 end
