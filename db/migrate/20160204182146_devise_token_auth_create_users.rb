@@ -1,6 +1,7 @@
 class DeviseTokenAuthCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
+      enable_extension 'hstore'
       ## Required
       t.string :provider, :null => false, :default => "email"
       t.string :uid, :null => false, :default => ""
@@ -41,7 +42,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration
       t.string :job_title
 
       ## Tokens
-      t.column :tokens, :json
+      t.json :tokens
 
       t.timestamps
     end
@@ -49,6 +50,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration
     add_index :users, :email
     add_index :users, [:uid, :provider],     :unique => true
     add_index :users, :reset_password_token, :unique => true
+    # add_index :users, :tokens, using: :gin
     # add_index :users, :confirmation_token,   :unique => true
     # add_index :users, :unlock_token,         :unique => true
   end
