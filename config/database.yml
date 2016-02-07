@@ -1,39 +1,16 @@
-
-# sqlite: &sqlite
-#   adapter: sqlite3
-#   database: db/<%= Rails.env %>.sqlite3 
-
-# postgresql: &postgresql
-#   adapter: postgresql
-#   username: postgres
-#   database: datalab_api_<%= Rails.env %>
-
-# defaults: &defaults
-#   pool: 5
-#   timeout: 5000
-#   host: localhost
-#   <<: *<%= ENV['DB'] || "postgresql" %>
+defaults: &defaults
+  pool: 5
+  timeout: 5000
+  host: localhost
+  adapter: postgresql
+  username: postgres
+  database: datalab_api_<%= Rails.env %>
 
 development:
-  pool: 5
-  timeout: 5000
-  host: localhost
-  adapter: postgresql
-  username: postgres
-  database: datalab_api_development
+  <<: *defaults
 
 test:
-  pool: 5
-  timeout: 5000
-  host: localhost
-  adapter: postgresql
-  username: postgres
-  database: datalab_api_test
+  <<: *defaults
 
 production:
-  pool: 5
-  timeout: 5000
-  host: localhost
-  adapter: postgresql
-  username: postgres
-  database: datalab_api_production
+  <<: *defaults
