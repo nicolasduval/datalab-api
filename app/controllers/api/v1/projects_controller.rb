@@ -7,7 +7,7 @@ module Api
 
       #GET /api/projects
       def index
-        @company = Company.last
+        @company = Company.where(id: params[:company_id]).take
         respond_data(@company.projects, 200)
       end
 
