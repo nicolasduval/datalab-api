@@ -23,4 +23,6 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'factory_girl_rails', '~> 4.0'
   gem 'database_cleaner'
+  gem 'simplecov', :require => false
+  gem 'json_spec', '~> 1.1', '>= 1.1.4'
 end

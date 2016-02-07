@@ -43,8 +43,8 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration
 
       ## Tokens
       t.json :tokens
-
-      t.timestamps
+      t.string  :created_at, default: DateTime.now.to_formatted_s(:rfc822)
+      t.string  :updated_at, default: DateTime.now.to_formatted_s(:rfc822)
     end
 
     add_index :users, :email

@@ -16,4 +16,12 @@ module Api::V1::ResponceHelper
     render json: data(arg), status: status
   end
 
+  def find_record?
+    begin
+      yield
+    rescue ActiveRecord::RecordNotFound  
+      respond_error("Could not find record." , 404)
+    end
+  end
+
 end

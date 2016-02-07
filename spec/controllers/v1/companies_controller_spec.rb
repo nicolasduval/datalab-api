@@ -71,6 +71,11 @@ RSpec.describe Api::V1::CompaniesController, type: :controller do
       expect(response).to have_http_status(200)
     end
   
+    it 'GET /companies/ response 200' do
+      get :new, format: :json
+      expect(response).to have_http_status(200)
+    end  
+
     it 'GET /companies/:id response 200' do
       get :show, id: @company.id, format: :json
       expect(response).to have_http_status(200)
@@ -84,6 +89,12 @@ RSpec.describe Api::V1::CompaniesController, type: :controller do
     it 'POST /companies/ response 201' do
       post :create, { company: { name: "Test Company" } }, format: :json
       expect(response).to have_http_status(201)
+    end
+
+    it 'POST /companies/ response 400' do
+      post :create, { company: { name: nil } }, format: :json
+      expect(response).to have_http_status(400)
+      expect(JSON.parse(response.body)).to eq( { 'error' => 'Record not created.' } )
     end
 
     # it 'PUT /companies/:id response 200' do

@@ -7,8 +7,12 @@ module Api
 
       #GET /api/projects
       def index
-        @company = Company.where(id: params[:company_id]).take
-        respond_data(@company.projects, 200)
+        @company = Company.where(id: params[:company_id]).take 
+        if @company
+          respond_data(@company.projects, 200)
+        else
+          respond_error("No projects found for company with id #{params[:company_id]}", 404)
+        end
       end
 
       #GET /api/projects/:id
@@ -18,11 +22,7 @@ module Api
 
       #GET /api/projects/:id
       def show
-        if @project
-          respond_data(@project, 200)
-        else 
-          respond_error(@project.errors, 404)
-        end
+        respond_data(@project, 200)
       end
 
       #POST /api/projects/
@@ -37,8 +37,7 @@ module Api
       
       #PUT /api/projects/:id
       def update
-        if @project
-          @project.update_attributes(params[:project])
+        if @project.update_attributes(params[:project])
           respond_data(@project, 200)
         else
           respond_error(@project.errors, 400)
@@ -47,14 +46,10 @@ module Api
 
       #DELETE /api/projects/:id
       def destroy
-        if @project
-          if @project.destroy
-            head :no_content
-          else
-            respond_error(@project.erros, 400)
-          end
+        if @project.destroy
+          head :no_content
         else
-          respond_error(@project.errors.full_massages, 400)
+          respond_error(@project.errors, 400)
         end
       end
 
@@ -67,7 +62,7 @@ module Api
       end
 
       def find_project
-        @project = Project.find(params[:id])
+        find_record? { @project = Project.find(params[:id]) }
       end
 
     end

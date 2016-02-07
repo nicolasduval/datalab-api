@@ -19,11 +19,7 @@ module Api
 
       #GET /api/companies/:id
       def show
-        if @company
-          respond_data(@company, 200)
-        else 
-          respond_error("Record not Found.", 404)
-        end
+        respond_data(@company, 200)
       end
 
       #POST /api/companies/
@@ -68,7 +64,7 @@ module Api
 
       # Before action 
       def find_company
-        @company = Company.find(params[:id])
+        find_record? { @company = Company.find(params[:id]) }
       end
 
 

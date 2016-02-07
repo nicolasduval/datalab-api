@@ -103,6 +103,11 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
       expect(response).to have_http_status(204)
     end
 
+    it "DELETE /projects/:id response 404" do
+      delete :destroy, id: 0, format: :json
+      expect(response).to have_http_status(404)
+    end
+
 
   end
 
