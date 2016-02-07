@@ -6,6 +6,11 @@ rvm:
 env:
   - DB=postgresql
 
+addons:
+    postgresql: '9.3'
+    code_climate:
+        repo_token: bc22c18f4dd71194456c95d355cc1e028166c105a5d307ddc05c1990dbba148c
+
 script:
   - bundle exec rake --trace db:create test
   - bundle exec rake --trace db:migrate test
@@ -14,7 +19,3 @@ script:
 before_script:
   - psql -c 'create database datalab_api_test' -U postgres
   - psql datalab_api_test -c 'create extension hstore;' -U postgres
-
-addons:
-    code_climate:
-        repo_token: bc22c18f4dd71194456c95d355cc1e028166c105a5d307ddc05c1990dbba148c
