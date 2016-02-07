@@ -71,7 +71,7 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
     end
   
     it "GET /projects/ response 200" do
-      get :index, format: :json
+      get :index, company_id: @company.id, format: :json
       expect(@projects.count).to eq( 2 ) 
       expect(response).to have_http_status(200)
     end
