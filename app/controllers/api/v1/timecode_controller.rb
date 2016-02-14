@@ -6,8 +6,8 @@ module Api
         fps = params['fps']
         tc = Timecode.new(fps)
         respond_data({
-          fsp: fps,
-          frames: tc.timecode(params['frames'])
+          fps: fps,
+          timecode: tc.timecode(params['frames'])
           }, 200)
       end
 
@@ -16,7 +16,7 @@ module Api
         timecode = Timecode.new(fps)
         respond_data({
           fps: fps,
-          timecode: timecode.frames(params['timecode'])
+          frames: timecode.frames(params['timecode'])
           }, 200)
       end
 
