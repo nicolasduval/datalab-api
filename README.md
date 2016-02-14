@@ -22,7 +22,7 @@ Ruby 2.0 or greater
 
 ## API Documentaion
 
-Visit the [API](http://docs.datalab.apiary.io/) documentations at apiary.
+Visit the [API](http://nicolasduval.github.io/slate/) documentations at apiary.
 
 ## Tests
 
