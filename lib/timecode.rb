@@ -88,6 +88,11 @@ class Timecode
     timecode(frm_out.to_i - frm_in.to_i)
   end
 
+  def sub(tcs=[])
+    frs = frames(tcs[0]) - frames(tcs[1])
+    timecode(frs)
+  end
+
 
   def add(tcs=[])
     frs = 0

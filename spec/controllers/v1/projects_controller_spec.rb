@@ -95,7 +95,7 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
     it "GET /projects/:id response 200" do
       get :show, id: @project.id, format: :json
       expect(response).to have_http_status(200)
-      expect(JSON.parse(response.body)['data']).to eq( @project.attributes )
+      expect(JSON.parse(response.body)).to eq( @project.attributes )
     end
 
     it "DELETE /projects/:id response 204" do

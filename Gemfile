@@ -5,6 +5,7 @@ gem 'rails-api', '0.4.0'
 gem "figaro"
 gem 'devise_token_auth'
 gem 'omniauth'
+gem 'rack-cors', :require => 'rack/cors'
 
 
 group :production do

@@ -4,16 +4,13 @@ module Api::V1::ResponceHelper
     return { error: args }
   end
 
-  def data(args)
-    return { data: args }
-  end
 
   def respond_error(arg, status)
     render json: error(arg), status: status
   end
 
   def respond_data(arg, status)
-    render json: data(arg), status: status
+    render json: arg, status: status
   end
 
   def find_record?

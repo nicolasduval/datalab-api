@@ -12,6 +12,14 @@ Rails.application.routes.draw do
       resources :projects
       resources :companies
 
+      # Timecode
+      scope :timecode do 
+        post 'to_frames'   => 'timecode#to_frames'
+        post 'to_timecode' => 'timecode#to_timecode'
+        post 'add'         => 'timecode#add'
+        post 'sub'         => 'timecode#sub'
+      end
+
     end
 
   end

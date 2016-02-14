@@ -97,6 +97,7 @@ GEM
     pry-rails (0.3.3)
       pry (>= 0.9.10)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.4)
@@ -197,6 +198,7 @@ DEPENDENCIES
   omniauth
   pg (= 0.18.1)
   pry-rails
+  rack-cors
   rails (= 4.2.4)
   rails-api (= 0.4.0)
   rails_12factor

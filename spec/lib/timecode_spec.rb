@@ -59,6 +59,11 @@ describe("Timecode") do
       expect(timecode.add(timecodes)).to eq '04:00:01:00'
     end
 
+    it 'sub timecodes' do
+      timecodes = ['02:00:00:01', '01:00:00:01']
+      expect(timecode.sub(timecodes)).to eq '01:00:00:00'
+    end
+
     it 'Fixnum to timecode @ 24fps' do
       expect(25.to_timecode(24)).to eq '00:00:01:01'
     end

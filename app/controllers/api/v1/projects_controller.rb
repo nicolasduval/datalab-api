@@ -7,12 +7,8 @@ module Api
 
       #GET /api/projects
       def index
-        @company = Company.where(id: params[:company_id]).take 
-        if @company
-          respond_data(@company.projects, 200)
-        else
-          respond_error("No projects found for company with id #{params[:company_id]}", 404)
-        end
+        find_record? { @company = Company.find(params[:company_id]) }
+        respond_data(@company.projects, 200)
       end
 
       #GET /api/projects/:id

@@ -8,7 +8,7 @@ module Api
       #GET /api/companies/
       def index
         @company = Company.all
-        render json: @company
+        render json: @company, status: 200
       end
 
 
