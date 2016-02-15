@@ -11,19 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204182146) do
+ActiveRecord::Schema.define(version: 20160214232223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "full_address"
     t.string "zip_code"
     t.string "phone_number"
-    t.string "created_at",   default: "Sun, 31 Jan 2016 18:11:08 +0100"
-    t.string "updated_at",   default: "Sun, 31 Jan 2016 18:11:08 +0100"
+    t.string "created_at",   default: "Sun, 14 Feb 2016 23:22:48 +0100"
+    t.string "updated_at",   default: "Sun, 14 Feb 2016 23:22:48 +0100"
   end
+
+  create_table "companies_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "company_id"
+    t.string  "created_at", default: "Mon, 15 Feb 2016 00:41:41 +0100"
+    t.string  "updated_at", default: "Mon, 15 Feb 2016 00:41:41 +0100"
+  end
+
+  add_index "companies_users", ["company_id"], name: "index_companies_users_on_company_id", using: :btree
+  add_index "companies_users", ["user_id"], name: "index_companies_users_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string  "name"
@@ -36,18 +47,18 @@ ActiveRecord::Schema.define(version: 20160204182146) do
     t.string  "sound_studio"
     t.string  "status"
     t.integer "company_id"
-    t.string  "created_at",   default: "Sun, 31 Jan 2016 18:11:08 +0100"
-    t.string  "updated_at",   default: "Sun, 31 Jan 2016 18:11:08 +0100"
+    t.string  "created_at",   default: "Sun, 14 Feb 2016 23:22:48 +0100"
+    t.string  "updated_at",   default: "Sun, 14 Feb 2016 23:22:48 +0100"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "provider",               default: "email", null: false
-    t.string   "uid",                    default: "",      null: false
-    t.string   "encrypted_password",     default: "",      null: false
+    t.string   "provider",               default: "email",                           null: false
+    t.string   "uid",                    default: "",                                null: false
+    t.string   "encrypted_password",     default: "",                                null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,       null: false
+    t.integer  "sign_in_count",          default: 0,                                 null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -61,9 +72,10 @@ ActiveRecord::Schema.define(version: 20160204182146) do
     t.string   "email"
     t.string   "phone_number"
     t.string   "job_title"
+    t.string   "companies",              default: [],                                             array: true
     t.json     "tokens"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "created_at",             default: "Sun, 14 Feb 2016 23:22:48 +0100"
+    t.string   "updated_at",             default: "Sun, 14 Feb 2016 23:22:48 +0100"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

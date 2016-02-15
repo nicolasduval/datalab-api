@@ -4,6 +4,7 @@ module Api
     class CompaniesController < ApplicationController
       
       before_action :find_company, only: [:show, :update, :destroy]
+      # before_action :authenticate_user!
 
       #GET /api/companies/
       def index
@@ -45,6 +46,7 @@ module Api
       #DELETE /apicompanies/:id
       def destroy
         if @company
+          @company.users.destroy_all
           if @company.destroy
             head :no_content
           else
@@ -55,6 +57,10 @@ module Api
         end
       end
 
+      def users
+        find_record? { @company = Company.find(params[:company_id]) }
+        respond_data(@company.users, 200)
+      end
 
       private 
 

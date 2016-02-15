@@ -17,7 +17,7 @@ module Api::V1::ResponceHelper
     begin
       yield
     rescue ActiveRecord::RecordNotFound  
-      respond_error("Could not find record." , 404)
+      respond_error("Could not find record" , 404)
     end
   end
 

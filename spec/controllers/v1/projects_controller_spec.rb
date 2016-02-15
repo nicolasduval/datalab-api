@@ -63,7 +63,6 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
     before(:each) do
       @company  = create(:company)
       @project  = create(:project, company_id: @company.id)
-      @projects = create_list(:project, 2, company_id: @company.id)
     end
 
     after(:each, except: [:destroy]) do
@@ -72,7 +71,6 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
   
     it "GET /projects/ response 200" do
       get :index, company_id: @company.id, format: :json
-      expect(@projects.count).to eq( 2 ) 
       expect(response).to have_http_status(200)
     end
 

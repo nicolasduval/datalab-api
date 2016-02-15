@@ -8,9 +8,13 @@ Rails.application.routes.draw do
 
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
       
-      resources :users
+      resources :companies do
+        get 'users' => 'companies#users'
+      end
+      resources :users do
+        get 'companies' => 'users#companies'
+      end
       resources :projects
-      resources :companies
 
       # Timecode
       scope :timecode do 

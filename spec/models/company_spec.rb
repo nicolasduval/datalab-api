@@ -48,7 +48,7 @@ RSpec.describe Company, type: :model do
   describe "Validation" do
 
     it "name should be present" do
-      expect(@company).to validate_presence_of :name
+      expect(@company).to validate_uniqueness_of :name
     end
 
     it "validates the many associated projects" do

@@ -8,7 +8,9 @@ module Api
       #GET /api/projects
       def index
         find_record? { @company = Company.find(params[:company_id]) }
-        respond_data(@company.projects, 200)
+        if @company
+          respond_data(@company.projects, 200)
+        end
       end
 
       #GET /api/projects/:id

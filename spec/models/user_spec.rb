@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+  before(:each) do
+    @user = create(:user)
+  end
+
   describe "Attributes" do
 
-    before(:each) do
-      @user = FactoryGirl.create(:user)
-    end
 
     it "has first name" do
       expect(@user).to have_attributes(first_name: "Giorgio")
@@ -27,7 +28,6 @@ RSpec.describe User, type: :model do
     it "has job title" do
       expect(@user).to have_attributes(job_title: "Technician")
     end
-    
 
   end
 

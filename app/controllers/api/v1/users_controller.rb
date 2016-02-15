@@ -25,6 +25,14 @@ module Api
       end
 
       def destroy
+        find_record? { @user = User.find(params[:id]) }
+        @user.companies.destroy_all
+        @user.destroy
+      end
+
+      def companies
+        find_record? { @user = User.find(params[:user_id]) }
+        respond_data(@user.companies, 200)
       end
 
     end
