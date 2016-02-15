@@ -13,18 +13,27 @@ module Api
       end
 
       def add
-        add_time = @timecode.add(params['timecodes'])
-        respond_data({ fps: @fps, timecode: add_time, 
-                       frames: @timecode.frames(add_time) }, 200)
+        calculate_timecodes('add')
       end
 
       def sub
-        sub_time = @timecode.sub(params['timecodes'])
-        respond_data({ fps: @fps, timecode: sub_time, 
-                       frames: @timecode.frames(sub_time) }, 200)
+        calculate_timecodes('sub')
       end
 
-      private 
+      private
+
+      def calculate_timecodes(arg)
+        if arg == 'add'
+          time = @timecode.add(params['timecodes'])
+        elsif arg == 'sub'
+          time = @timecode.sub(params['timecodes'])
+        end
+        
+        respond_data({ fps: @fps, 
+                       timecode: time, 
+                       frames: @timecode.frames(time) }, 200)
+        
+      end
 
       def set_fps
         @fps = params['fps']
