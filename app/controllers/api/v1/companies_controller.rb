@@ -35,26 +35,14 @@ module Api
 
       #PUT /api/companies/:id
       def update
-        @company.update_attributes(params[:company])
-        if @company
-          respond_data(@company, 200)
-        else
-          respond_error(@company.errors, 400)
-        end
+        @company.update_attributes(companies_params)
+        respond_data(@company, 200)
       end
       
       #DELETE /apicompanies/:id
       def destroy
-        if @company
-          @company.users.destroy_all
-          if @company.destroy
-            head :no_content
-          else
-            respond_error(@company.errors.full_messages, 400)
-          end
-        else
-          respond_error(@company.errors.full_messages, 400)
-        end
+        @company.users.destroy_all
+        @company.destroy
       end
 
       def users

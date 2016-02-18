@@ -97,12 +97,13 @@ RSpec.describe Api::V1::CompaniesController, type: :controller do
       expect(JSON.parse(response.body)).to eq( { 'error' => 'Record not created.' } )
     end
 
-    # it 'PUT /companies/:id response 200' do
-    #   @company.update_attributes( name: 'New Name' )
-    #   put :update, id: @company.id, format: :json
-    #   expect(@company.name).to eq("New Name")
-    #   expect(response.status).to eq(200)
-    # end
+    it 'PUT /companies/:id response 200' do
+      params = { name: 'New Name' }
+      put :update, id: @company.id, company: params, format: :json
+      @company.update_attributes(params)
+      expect(JSON.parse(response.body)['name']).to eq(params[:name])
+      expect(response).to have_http_status(200)
+    end
 
     it 'GET /companies/:id response 200' do
       get :show, id: @company.id, format: :json
