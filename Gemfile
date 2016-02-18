@@ -26,5 +26,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'simplecov', :require => false
   gem 'codecov', :require => false
+  gem "codeclimate-test-reporter"
   gem 'json_spec', '~> 1.1', '>= 1.1.4'
 end

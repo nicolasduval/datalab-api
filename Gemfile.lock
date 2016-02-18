@@ -42,6 +42,8 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.1)
+    codeclimate-test-reporter (0.4.8)
+      simplecov (>= 0.7.1, < 1.0.0)
     codecov (0.1.4)
       json
       simplecov
@@ -195,6 +197,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  codeclimate-test-reporter
   codecov
   database_cleaner
   devise_token_auth
