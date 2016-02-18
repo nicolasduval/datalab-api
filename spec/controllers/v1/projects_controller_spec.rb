@@ -9,7 +9,6 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
     end
 
     it { expect(@controller).to respond_to(:index) }
-    it { expect(@controller).to respond_to(:new) }
     it { expect(@controller).to respond_to(:show) }
     it { expect(@controller).to respond_to(:create) }
     it { expect(@controller).to respond_to(:update) }
@@ -27,11 +26,6 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
     it 'to routes index' do  
       params = { format: 'json', controller: "#{@version_api}/projects", action: 'index' }
       expect(:get => "/api/projects/").to route_to( params ) 
-    end
-
-    it 'to routes new' do  
-      params = { format: 'json', controller: "#{@version_api}/projects", action: 'new' }
-      expect(:get => "/api/projects/new").to route_to( params ) 
     end
 
     it 'to routes show' do  

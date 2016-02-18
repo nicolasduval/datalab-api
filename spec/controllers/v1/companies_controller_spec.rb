@@ -28,11 +28,6 @@ RSpec.describe Api::V1::CompaniesController, type: :controller do
       expect(:get => "/api/projects/").to route_to( params ) 
     end
 
-    it 'to routes new' do  
-      params = { format: 'json', controller: "#{@version_api}/projects", action: 'new' }
-      expect(:get => "/api/projects/new").to route_to( params ) 
-    end
-
     it 'to routes show' do  
       params = { format: 'json', controller: "#{@version_api}/projects", action: 'show', id: @company.id.to_s }
       expect(:get => "/api/projects/#{@company.id}").to route_to( params ) 
