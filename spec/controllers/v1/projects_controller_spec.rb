@@ -79,7 +79,6 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
       params = { project: { name: "Project", company_id: @company.id } }
       post :create, params , format: :json
       expect(response).to have_http_status(201)
-      # expect(JSON.parse(response.body)['data']).to match( { name: "Project" } )
     end
 
     it 'POST /projects/ response 400' do
@@ -87,8 +86,13 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
       expect(response).to have_http_status(400)
     end
 
-    # it "PUT /projects/:id response 200" do
-    # end
+    it 'PUT /projects/:id response 200' do
+      params = { name: 'New Name' }
+      put :update, id: @project.id, project: params, format: :json
+      @project.update_attributes(params)
+      expect(JSON.parse(response.body)['name']).to eq(params[:name])
+      expect(response).to have_http_status(200)
+    end
 
     it "GET /projects/:id response 200" do
       get :show, id: @project.id, format: :json

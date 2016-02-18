@@ -43,6 +43,7 @@ module Api
       def destroy
         @company.users.destroy_all
         @company.destroy
+        head :no_content
       end
 
       def users

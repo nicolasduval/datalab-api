@@ -42,6 +42,10 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.1)
+    codecov (0.1.4)
+      json
+      simplecov
+      url
     coderay (1.1.0)
     concurrent-ruby (1.0.0)
     database_cleaner (1.4.1)
@@ -177,6 +181,7 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    url (0.3.2)
     warden (1.2.4)
       rack (>= 1.0)
     web-console (2.2.1)
@@ -190,6 +195,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  codecov
   database_cleaner
   devise_token_auth
   factory_girl_rails (~> 4.0)

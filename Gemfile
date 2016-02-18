@@ -25,5 +25,6 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.0'
   gem 'database_cleaner'
   gem 'simplecov', :require => false
+  gem 'codecov', :require => false
   gem 'json_spec', '~> 1.1', '>= 1.1.4'
 end

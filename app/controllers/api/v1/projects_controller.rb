@@ -35,11 +35,8 @@ module Api
       
       #PUT /api/projects/:id
       def update
-        if @project.update_attributes(params[:project])
-          respond_data(@project, 200)
-        else
-          respond_error(@project.errors, 400)
-        end
+        @project.update_attributes(projects_params)
+        respond_data(@project, 200)
       end
 
       #DELETE /api/projects/:id
