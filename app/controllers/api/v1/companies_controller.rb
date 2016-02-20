@@ -29,14 +29,17 @@ module Api
         if @company.save
           respond_data(@company, 201)
         else
-          respond_error("Record not created.", 400)
+          respond_error(@company.errors, 400)
         end
       end
 
       #PUT /api/companies/:id
       def update
-        @company.update_attributes(companies_params)
-        respond_data(@company, 200)
+        if @company.update_attributes(companies_params)
+          respond_data(@company, 200)
+        else
+          respond_error(@company.errors, 400)
+        end
       end
       
       #DELETE /apicompanies/:id

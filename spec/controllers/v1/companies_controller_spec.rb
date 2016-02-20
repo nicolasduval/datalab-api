@@ -86,10 +86,16 @@ RSpec.describe Api::V1::CompaniesController, type: :controller do
       expect(response).to have_http_status(201)
     end
 
-    it 'POST /companies/ response 400' do
+    it 'POST /companies/ can\'t be blank' do
       post :create, { company: { name: nil } }, format: :json
       expect(response).to have_http_status(400)
-      expect(JSON.parse(response.body)).to eq( { 'error' => 'Record not created.' } )
+      expect(JSON.parse(response.body)['error']).to eq( "name"=>["can't be blank"] )
+    end
+
+    it 'POST /companies/ name has already been taken' do
+      post :create, { company: { name: @company.name } }, format: :json
+      expect(response).to have_http_status(400)
+      expect(JSON.parse(response.body)['error']).to eq( "name"=>["has already been taken"] )
     end
 
     it 'PUT /companies/:id response 200' do
@@ -98,6 +104,15 @@ RSpec.describe Api::V1::CompaniesController, type: :controller do
       @company.update_attributes(params)
       expect(JSON.parse(response.body)['name']).to eq(params[:name])
       expect(response).to have_http_status(200)
+    end
+
+    it 'PUT /companies/:id name has already been taken' do
+      company = create(:company, name: "demo")
+      params = { name: company.name }
+      put :update, id: @company.id, company: params, format: :json
+      @company.update_attributes(params)
+      expect(JSON.parse(response.body)['error']).to eq("name"=>["has already been taken"])
+      expect(response).to have_http_status(400)
     end
 
     it 'GET /companies/:id response 200' do
