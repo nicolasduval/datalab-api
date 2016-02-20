@@ -110,6 +110,56 @@ ALTER SEQUENCE companies_users_id_seq OWNED BY companies_users.id;
 
 
 --
+-- Name: deliveries; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE deliveries (
+    id integer NOT NULL,
+    user_id integer,
+    project_id integer,
+    reference character varying,
+    number integer,
+    frame_rate character varying,
+    resolution character varying,
+    aspect_ratio character varying,
+    format character varying,
+    anamorphic character varying,
+    color_space character varying,
+    compression character varying,
+    subtitles character varying,
+    audio character varying,
+    approved character varying DEFAULT 'f'::character varying,
+    status character varying,
+    internal boolean,
+    assigned_to integer,
+    delivery_method character varying,
+    remarks text,
+    checksum character varying,
+    created_at character varying DEFAULT 'Sat, 20 Feb 2016 11:36:40 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sat, 20 Feb 2016 11:36:40 +0100'::character varying
+);
+
+
+--
+-- Name: deliveries_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE deliveries_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: deliveries_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE deliveries_id_seq OWNED BY deliveries.id;
+
+
+--
 -- Name: projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -227,6 +277,13 @@ ALTER TABLE ONLY companies_users ALTER COLUMN id SET DEFAULT nextval('companies_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY deliveries ALTER COLUMN id SET DEFAULT nextval('deliveries_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq'::regclass);
 
 
@@ -251,6 +308,14 @@ ALTER TABLE ONLY companies
 
 ALTER TABLE ONLY companies_users
     ADD CONSTRAINT companies_users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: deliveries_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY deliveries
+    ADD CONSTRAINT deliveries_pkey PRIMARY KEY (id);
 
 
 --
@@ -324,4 +389,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160130153642');
 INSERT INTO schema_migrations (version) VALUES ('20160204182146');
 
 INSERT INTO schema_migrations (version) VALUES ('20160214232223');
+
+INSERT INTO schema_migrations (version) VALUES ('20160220102946');
 

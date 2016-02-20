@@ -3,7 +3,18 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   before(:each) do
-    @user = create(:user)
+     @company  = create(:company)
+     @project  = create(:project, company_id: @company.id)
+     @user     = create(:user)
+     @delivery = create(:delivery, user_id: @user.id, project_id: @project.id, assigned_to: @user.id)
+  end
+
+  describe 'Relations' do
+
+    it 'has_many deliveries' do
+      expect(@user).to have_many(:deliveries)
+    end
+
   end
 
   describe "Attributes" do
