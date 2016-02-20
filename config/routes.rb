@@ -14,7 +14,10 @@ Rails.application.routes.draw do
       resources :users do
         get 'companies' => 'users#companies'
       end
+      
       resources :projects
+      
+      resources :deliveries
 
       # Timecode
       scope :timecode do 
