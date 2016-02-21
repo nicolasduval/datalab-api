@@ -1,4 +1,4 @@
-# datalab-api (in development)
+# datalab-api
 Post Production Management REST API.   
 *This project is in development, some of the following may still not be applicable*
 
@@ -9,7 +9,7 @@ Post Production Management REST API.
 
 
 ## Synopsis   
-Rails backend API.   
+
 Manage post-production projects, workflow and deliveries.  
 
 ## Requirements   
@@ -17,23 +17,43 @@ Ruby 2.0.0
 postgreSQL 9.3
 
 
+
+## API Documentaion
+
+Visit the [API](http://nicolasduval.github.io/datalab-docs/) documentations.
+
+
 ## Installation
 
 Clone the repository.
 
-` $ git clone https://github.com/nicolasduval/datalab-api.git`  
-
-To create a new token run the the following command.   
-
+```shell
+  $ git clone https://github.com/nicolasduval/datalab-api.git
 ```
-  
-  $ rake db:create:api_key[yout_name]
 
+Installe dependencies
+
+```shell
+  $ bundle install
 ```
+
+
+Migrate the database
+
+```shell
+  $ rake db:migrate
+```
+
+Run the server
+
+```shell
+  $ rails server
+```
+
 
 ## Authorization
 The API is secured by an Authorization Token Key.    
-Each requests made to the API mush have a authorization token in the header.   
+Each requests made to the API must have a authorization token in the header.   
 `-H "Authorization: Token token='959c3652a091b01687c29677dafcff7b' "`  
 To create a new token run the the following command.   
 
@@ -176,131 +196,35 @@ the `delivery_id:` and `user_id:` attribues.
 - body
 
 
+## Contributing
 
+1. Create a feature branch with your changes.
+2. Write some test cases.
+3. Make all the tests pass.
+4. Issue a pull request.
 
-## API Documentaion
+## LICENSE
 
-Visit the [API](http://nicolasduval.github.io/datalab-docs/) documentations.
+(The MIT License)
 
-## Test
-### Models
-#####Relations
+Copyright (c) 2016 Nicolas Duval <nduval.dev@gmail.com>
 
-```ruby
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
 
-  describe 'Relations' do
-     ...
-      it 'has many deliveries' do
-          expect(@project).to have_many(:deliveries)
-      end
-     ...
-    end
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
 
-```
-
-#####Attributes
-
-```ruby
-
-  
-  describe "Attributes" do
-    ...
-    it 'has a name attributes' do 
-      expect(@project).to have_attributes name: "my_project"
-    end
-
-    it 'has a company name' do
-      expect(@project.company.zip_code).to eq '1050'
-    end
-
-    it 'has a name attributes' do 
-      expect(@project).to have_attributes company_id: @company.id
-    end
-    ...
-  end
-
-```
-#####Validations
-
-```ruby 
-
-  describe "Validation" do
-    ...
-    it "name should be present" do
-      expect(@project).to validate_presence_of :name
-    end
-
-    it 'validates the associated company' do
-      expect(@project).to belong_to(:company)
-    end
-
-    it "company_id should be present" do
-      expect(@project).to validate_presence_of :company_id
-    end
-
-    it "should not be valid" do
-      @project = Project.new name: nil
-      expect(@project).to_not be_valid
-    end
-    ...
-  end
-
-
-```
-
-###Controllers
-
-#####Actions
-
-```ruby 
- describe "Actions" do
-    ...
-    it { expect(@controller).to respond_to(:index) }
-    it { expect(@controller).to respond_to(:show) }
-    it { expect(@controller).to respond_to(:create) }
-    it { expect(@controller).to respond_to(:update) }
-    it { expect(@controller).to respond_to(:destroy) }
-    ...
-  end
-
-```
-
-#####Routing
-
-```ruby 
- describe "Routing" do
-    ...
-    it 'to routes index' do  
-      params = { format: 'json', controller: "#{@version_api}/projects", action: 'index' }
-      expect(:get => "/api/projects/").to route_to( params ) 
-    end
-
-    it 'to routes show' do  
-      params = { format: 'json', controller: "#{@version_api}/projects", action: 'show', id: @project.id.to_s }
-      expect(:get => "/api/projects/#{@project.id}").to route_to( params ) 
-    end
-    ...
-end
-
-```
-
-#####Responce
-
-```ruby 
- describe 'Responce' do
-    ...
-    it "GET /projects/ response 200" do
-      get :index, company_id: @company.id, format: :json
-      expect(response).to have_http_status(200)
-    end
-   
-    it "GET /projects/:id response 200" do
-      get :show, id: @project.id, format: :json
-      expect(response).to have_http_status(200)
-      expect(JSON.parse(response.body)).to eq( @project.attributes )
-    end
-    ...
-  end
-
-```
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
