@@ -19,10 +19,6 @@ RSpec.describe User, type: :model do
       expect(@user).to have_and_belong_to_many(:companies)
     end
 
-    it 'has_one key' do
-      expect(@user).to have_one(:api_key)
-    end
-
   end
 
   describe "Attributes" do

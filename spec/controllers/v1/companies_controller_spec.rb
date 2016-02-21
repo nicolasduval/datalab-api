@@ -55,7 +55,7 @@ RSpec.describe Api::V1::CompaniesController, type: :controller do
     before(:each) do
       @company  = create(:company)
       @user     = create(:user)
-      @api_key  = create(:api_key, user_id: @user.id)
+      @api_key  = create(:api_key, username: @user.first_name)
       request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
       sign_in @user
     end

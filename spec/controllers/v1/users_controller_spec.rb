@@ -59,8 +59,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   describe 'Responce' do
 
     before(:each) do
-      @user  = create(:user)
-      @api_key  = create(:api_key, user_id: @user.id)
+      @user     = create(:user)
+      @api_key  = create(:api_key, username: @user.first_name)
       request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
     end
 

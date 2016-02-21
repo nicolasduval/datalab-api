@@ -85,8 +85,8 @@ CREATE TABLE companies (
     full_address character varying,
     zip_code character varying,
     phone_number character varying,
-    created_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying,
-    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:39 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:39 +0100'::character varying
 );
 
 
@@ -117,8 +117,8 @@ CREATE TABLE companies_users (
     id integer NOT NULL,
     user_id integer,
     company_id integer,
-    created_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:32 +0100'::character varying,
-    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:32 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying
 );
 
 
@@ -167,8 +167,8 @@ CREATE TABLE deliveries (
     delivery_method character varying,
     remarks text,
     checksum character varying,
-    created_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:32 +0100'::character varying,
-    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:32 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying
 );
 
 
@@ -207,8 +207,8 @@ CREATE TABLE projects (
     sound_studio character varying,
     status character varying,
     company_id integer,
-    created_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying,
-    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:39 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:39 +0100'::character varying
 );
 
 
@@ -267,8 +267,8 @@ CREATE TABLE users (
     phone_number character varying,
     job_title character varying,
     tokens json,
-    created_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying,
-    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying
 );
 
 
