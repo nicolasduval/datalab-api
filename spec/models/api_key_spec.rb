@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe ApiKey, type: :model do
   
   before(:each) do
-     @user     = create(:user)
-     @api_key = create(:api_key, user_id: @user.id)
+     @user    = create(:user)
+     @api_key = create(:api_key, username: @user.first_name  + ' ' + @user.last_name )
   end
 
  describe "Attributes" do
