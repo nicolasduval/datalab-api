@@ -9,7 +9,6 @@ RSpec.describe Api::V1::CompaniesController, type: :controller do
     end
 
     it { expect(@controller).to respond_to(:index) }
-    it { expect(@controller).to respond_to(:new) }
     it { expect(@controller).to respond_to(:show) }
     it { expect(@controller).to respond_to(:create) }
     it { expect(@controller).to respond_to(:update) }
@@ -54,7 +53,12 @@ RSpec.describe Api::V1::CompaniesController, type: :controller do
   describe 'Responce' do
 
     before(:each) do
-      @company = create(:company)
+      @company  = create(:company)
+      @user     = create(:user)
+      @api_key  = create(:api_key, user_id: @user)
+      @api_key  = create(:api_key, user_id: @user.id)
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
+      sign_in @user
     end
     
     after(:each, except: [:destroy]) do
@@ -62,16 +66,13 @@ RSpec.describe Api::V1::CompaniesController, type: :controller do
     end
 
     it 'GET /companies/ response 200' do
+      @request.env['Authorization'] = "Token token=\"#{@api_key.access_token}\"" 
       get :index, format: :json
       expect(response).to have_http_status(200)
     end
-  
-    it 'GET /companies/ response 200' do
-      get :new, format: :json
-      expect(response).to have_http_status(200)
-    end  
 
     it 'GET /companies/:id response 200' do
+      @request.env['Authorization'] = "Token token=\"#{@api_key.access_token}\"" 
       get :show, id: @company.id, format: :json
       expect(response).to have_http_status(200)
     end

@@ -24,7 +24,7 @@ RSpec.describe Api::V1::DeliveriesController, type: :controller do
       @project  = create(:project, company_id: @company.id)
       @user     = create(:user)
       @delivery = create(:delivery, user_id: @user.id, project_id: @project.id, assigned_to: @user.id)
-    end    
+    end 
 
     it 'to routes index' do  
       params = { format: 'json', controller: "#{@version_api}/deliveries", action: 'index' }
@@ -61,7 +61,10 @@ RSpec.describe Api::V1::DeliveriesController, type: :controller do
       @project  = create(:project, company_id: @company.id)
       @user     = create(:user)
       @delivery = create(:delivery, user_id: @user.id, project_id: @project.id, assigned_to: @user.id)
-    end    
+      @api_key  = create(:api_key, user_id: @user.id)
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
+      sign_in @user
+    end
 
     after(:each, except: [:destroy]) do
       expect(response.header['Content-Type']).to eq('application/json; charset=utf-8')

@@ -1,9 +1,12 @@
 module Api
   module V1
 
-    class DeliveriesController < ApplicationController
+    class DeliveriesController < Api::BaseController
 
+      before_action :authenticate_user!
+      before_action :restrict_api_access
       before_action :find_delivery, only: [:show, :update, :destroy]
+      before_action :find_delivery_id, only: [:created_by]
       
       def index
         find_record? { @project = Project.find(params[:project_id]) }
@@ -38,6 +41,10 @@ module Api
         end
       end
 
+      def created_by
+        respond_data(@delivery.user, 200)
+      end
+
       private
 
       def deliveries_params
@@ -50,6 +57,10 @@ module Api
 
       def find_delivery
         find_record? { @delivery = Delivery.find(params[:id]) }
+      end
+
+      def find_delivery_id
+        find_record? { @delivery = Delivery.find(params[:delivery_id]) }
       end
 
 

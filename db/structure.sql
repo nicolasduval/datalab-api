@@ -44,6 +44,38 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: api_keys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE api_keys (
+    id integer NOT NULL,
+    access_token character varying,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: api_keys_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE api_keys_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: api_keys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE api_keys_id_seq OWNED BY api_keys.id;
+
+
+--
 -- Name: companies; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -53,8 +85,8 @@ CREATE TABLE companies (
     full_address character varying,
     zip_code character varying,
     phone_number character varying,
-    created_at character varying DEFAULT 'Mon, 15 Feb 2016 00:41:33 +0100'::character varying,
-    updated_at character varying DEFAULT 'Mon, 15 Feb 2016 00:41:33 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 14:05:21 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 14:05:21 +0100'::character varying
 );
 
 
@@ -85,8 +117,8 @@ CREATE TABLE companies_users (
     id integer NOT NULL,
     user_id integer,
     company_id integer,
-    created_at character varying DEFAULT 'Mon, 15 Feb 2016 00:41:34 +0100'::character varying,
-    updated_at character varying DEFAULT 'Mon, 15 Feb 2016 00:41:34 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 14:05:21 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 14:05:21 +0100'::character varying
 );
 
 
@@ -135,8 +167,8 @@ CREATE TABLE deliveries (
     delivery_method character varying,
     remarks text,
     checksum character varying,
-    created_at character varying DEFAULT 'Sat, 20 Feb 2016 11:36:40 +0100'::character varying,
-    updated_at character varying DEFAULT 'Sat, 20 Feb 2016 11:36:40 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 14:05:21 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 14:05:21 +0100'::character varying
 );
 
 
@@ -175,8 +207,8 @@ CREATE TABLE projects (
     sound_studio character varying,
     status character varying,
     company_id integer,
-    created_at character varying DEFAULT 'Mon, 15 Feb 2016 00:41:33 +0100'::character varying,
-    updated_at character varying DEFAULT 'Mon, 15 Feb 2016 00:41:33 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 14:05:21 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 14:05:21 +0100'::character varying
 );
 
 
@@ -235,8 +267,8 @@ CREATE TABLE users (
     phone_number character varying,
     job_title character varying,
     tokens json,
-    created_at character varying DEFAULT 'Mon, 15 Feb 2016 00:41:33 +0100'::character varying,
-    updated_at character varying DEFAULT 'Mon, 15 Feb 2016 00:41:33 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 14:05:21 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 14:05:21 +0100'::character varying
 );
 
 
@@ -257,6 +289,13 @@ CREATE SEQUENCE users_id_seq
 --
 
 ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY api_keys ALTER COLUMN id SET DEFAULT nextval('api_keys_id_seq'::regclass);
 
 
 --
@@ -292,6 +331,14 @@ ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq':
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: api_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY api_keys
+    ADD CONSTRAINT api_keys_pkey PRIMARY KEY (id);
 
 
 --
@@ -391,4 +438,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160204182146');
 INSERT INTO schema_migrations (version) VALUES ('20160214232223');
 
 INSERT INTO schema_migrations (version) VALUES ('20160220102946');
+
+INSERT INTO schema_migrations (version) VALUES ('20160221022757');
 

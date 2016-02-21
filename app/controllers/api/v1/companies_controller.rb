@@ -1,21 +1,16 @@
 module Api
   module V1
 
-    class CompaniesController < ApplicationController
+    class CompaniesController < Api::BaseController
       
+      before_action :authenticate_user!
+      before_action :restrict_api_access
       before_action :find_company, only: [:show, :update, :destroy]
-      # before_action :authenticate_user!
 
       #GET /api/companies/
       def index
         @company = Company.all
         render json: @company, status: 200
-      end
-
-
-      #GET /api/companies/:id
-      def new
-        @company = Company.new()
       end
 
       #GET /api/companies/:id
@@ -64,8 +59,6 @@ module Api
       def find_company
         find_record? { @company = Company.find(params[:id]) }
       end
-
-
 
     end
 

@@ -60,6 +60,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
     before(:each) do
       @user  = create(:user)
+      @api_key  = create(:api_key, user_id: @user.id)
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
     end
 
     after(:each, except: [:destroy]) do

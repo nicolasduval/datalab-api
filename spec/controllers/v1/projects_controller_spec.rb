@@ -58,6 +58,8 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
       @company  = create(:company)
       @project  = create(:project, company_id: @company.id)
       @user     = create(:user)
+      @api_key  = create(:api_key, user_id: @user.id)
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
       sign_in @user
     end
 

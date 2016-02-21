@@ -52,6 +52,10 @@ RSpec.describe Api::V1::TimecodeController, type: :controller do
       @frames    = { fps: 24, frames: 86400 }
       @add       = { fps: 24, timecode: "00:00:01:01", frames: 25 }
       @sub       = { fps: 24, timecode: "00:00:00:14", frames: 14 }
+      @user      = create(:user)
+      @api_key   = create(:api_key, user_id: @user.id)
+      request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(@api_key.access_token)
+      sign_in @user
     end
 
     after(:each, except: [:destroy]) do

@@ -11,14 +11,20 @@ Rails.application.routes.draw do
       resources :companies do
         get 'users' => 'companies#users'
       end
+      
+      get 'current_user' => 'users#logged_in_user'
       resources :users do
-        get 'companies' =>  'users#companies'
-        get 'deliveries' => 'users#deliveries'
+        get 'companies'    =>  'users#companies'
+        get 'deliveries'   => 'users#deliveries'
       end
       
-      resources :projects
+      resources :projects do
+        get 'deliveries' => 'projects#deliveries'
+      end
       
-      resources :deliveries
+      resources :deliveries do 
+        get "created_by" => "deliveries#created_by"
+      end
 
       # Timecode
       scope :timecode do 

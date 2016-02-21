@@ -1,9 +1,12 @@
 module Api
   module V1
 
-    class ProjectsController < ApplicationController 
+    class ProjectsController < Api::BaseController
+     
       before_action :authenticate_user!
+      before_action :restrict_api_access
       before_action :find_project, only: [:show, :update, :destroy]
+      before_action :find_project_id, only: [:companies, :deliveries]
 
       #GET /api/projects
       def index
@@ -46,6 +49,10 @@ module Api
         end
       end
 
+      def deliveries
+        respond_data(@project.deliveries, 200)
+      end
+
 
       private
 
@@ -56,6 +63,10 @@ module Api
 
       def find_project
         find_record? { @project = Project.find(params[:id]) }
+      end
+
+      def find_project_id
+        find_record? { @project = Project.find(params[:project_id]) }
       end
 
     end

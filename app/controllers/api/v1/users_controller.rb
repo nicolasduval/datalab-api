@@ -1,9 +1,9 @@
 module Api
   module V1
-    class UsersController < ApplicationController
+    class UsersController < Api::BaseController
       
-      # include DeviseTokenAuth::Concerns::SetUserByToken
       before_action :authenticate_user!
+      before_action :restrict_api_access
       before_action :find_user, only: [:show, :update, :destroy]
       before_action :find_user_id, only: [:companies, :deliveries]
 
@@ -45,6 +45,10 @@ module Api
         end
       end
 
+      def logged_in_user
+        respond_data(current_user, 200)
+      end
+
       def companies
         respond_data(@user.companies, 200)
       end
@@ -54,6 +58,8 @@ module Api
       end
 
       private
+
+
 
       def users_params
         params.require(:user).permit(:first_name, :last_name, :email, :password, :phone_number, :job_title )

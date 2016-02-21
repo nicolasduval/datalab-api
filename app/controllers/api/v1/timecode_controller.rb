@@ -1,7 +1,9 @@
 module Api
   module V1
-    class TimecodeController < ApplicationController
+    class TimecodeController < Api::BaseController
 
+      before_action :authenticate_user!
+      before_action :restrict_api_access
       before_action :set_fps
 
       def to_timecode
