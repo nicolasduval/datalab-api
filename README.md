@@ -53,7 +53,7 @@ Run the server
 
 ## Authorization
 The API is secured by an Authorization Token Key.    
-Each requests made to the API mush have a authorization token in the header.   
+Each requests made to the API must have a authorization token in the header.   
 `-H "Authorization: Token token='959c3652a091b01687c29677dafcff7b' "`  
 To create a new token run the the following command.   
 
