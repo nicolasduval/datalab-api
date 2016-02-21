@@ -31,7 +31,7 @@ Clone the repository.
   $ git clone https://github.com/nicolasduval/datalab-api.git
 ```
 
-Installe dependencies
+Install dependencies
 
 ```shell
   $ bundle install
@@ -111,7 +111,7 @@ The server will then send back new values for this headers.
 - Issue tracker
 
 ## Controllers
-Requests made with this controllers are not stored in the Database.   
+Requests made to this controllers will not stored in the Database.   
 
 - Timecode
 
