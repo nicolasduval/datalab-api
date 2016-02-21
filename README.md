@@ -196,6 +196,12 @@ the `delivery_id:` and `user_id:` attribues.
 - body
 
 
+## Rake Tasks
+```
+  rake db:create:api_key[username]        # create new API Key, Usage: db:list:api_key[username]
+  rake db:list:api_key                    # List API Keys, Usage: db:list:api_key
+  rake db:seeds                           # seeds, Usage: db:seeds
+```
 ## Contributing
 
 1. Create a feature branch with your changes.
