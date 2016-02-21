@@ -2,9 +2,10 @@ module Api
   module V1
     class UsersController < ApplicationController
       
-      include DeviseTokenAuth::Concerns::SetUserByToken
+      # include DeviseTokenAuth::Concerns::SetUserByToken
       before_action :authenticate_user!
       before_action :find_user, only: [:show, :update, :destroy]
+      before_action :find_user_id, only: [:companies, :deliveries]
 
       #GET /api/users/
       def index
@@ -21,6 +22,7 @@ module Api
       def create
         @user = User.new(users_params)
         if @user.save
+          CompaniesUsers.create!(company_id: params[:company_id], user_id: @user.id)
           respond_data(@user, 201)
         else
           respond_error(@user.errors, 400)
@@ -35,12 +37,20 @@ module Api
       
       #DELETE /api/users/:id
       def destroy
-        # @user.companies.destroy_all
+        @user.companies.destroy_all
         if @user.destroy
           head :no_content
         else
           respond_error(@user.errors, 400)
         end
+      end
+
+      def companies
+        respond_data(@user.companies, 200)
+      end
+
+      def deliveries
+        respond_data(@user.deliveries, 200)
       end
 
       private
@@ -51,6 +61,10 @@ module Api
 
       def find_user
         find_record? { @user = User.find(params[:id]) }
+      end
+
+      def find_user_id
+        find_record? { @user = User.find(params[:user_id]) }
       end
 
     end

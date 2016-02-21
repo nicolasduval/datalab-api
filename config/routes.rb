@@ -12,7 +12,8 @@ Rails.application.routes.draw do
         get 'users' => 'companies#users'
       end
       resources :users do
-        get 'companies' => 'users#companies'
+        get 'companies' =>  'users#companies'
+        get 'deliveries' => 'users#deliveries'
       end
       
       resources :projects

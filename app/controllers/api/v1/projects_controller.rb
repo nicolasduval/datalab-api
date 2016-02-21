@@ -2,7 +2,7 @@ module Api
   module V1
 
     class ProjectsController < ApplicationController 
-
+      before_action :authenticate_user!
       before_action :find_project, only: [:show, :update, :destroy]
 
       #GET /api/projects

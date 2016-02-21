@@ -57,6 +57,8 @@ RSpec.describe Api::V1::ProjectsController, type: :controller do
     before(:each) do
       @company  = create(:company)
       @project  = create(:project, company_id: @company.id)
+      @user     = create(:user)
+      sign_in @user
     end
 
     after(:each, except: [:destroy]) do
