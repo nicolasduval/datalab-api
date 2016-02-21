@@ -7,7 +7,6 @@ Post Production Management REST API.
 [![Code Climate](https://codeclimate.com/github/nicolasduval/datalab-api/badges/gpa.svg)](https://codeclimate.com/github/nicolasduval/datalab-api)
 [![Test Coverage](https://codeclimate.com/github/nicolasduval/datalab-api/badges/coverage.svg)](https://codeclimate.com/github/nicolasduval/datalab-api/coverage)
 
-
 ## Synopsis   
 
 Manage post-production projects, workflow and deliveries.  
@@ -59,7 +58,7 @@ To create a new token run the the following command.
 
 ```
   
-  $ rake db:create:api_key[yout_name]
+  $ rake db:create:api_key[username]
 
 ```
 
