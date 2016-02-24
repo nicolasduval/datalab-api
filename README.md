@@ -100,7 +100,7 @@ The server will then send back new values for this headers.
 
 * [Company](#company)
 - Users
-- Project
+* [Project](#project)
   -  ProjectComment
 - Delivery
   - DeliveryComment
@@ -126,7 +126,7 @@ Requests made to this controllers will not stored in the Database.
 
 ## Project
 
-When createing a new project, the record must be associated with a `Company ID` reaord using   
+When createing a new project, the record must be associated with a `Company ID` record using   
 the `company_id:` attribue.
 
 
@@ -144,7 +144,7 @@ the `company_id:` attribue.
 
 ## ProjectComment
 
-When createing a new ProjectComment, the record must be associated with a `Project ID` and `User ID` reaord using   
+When createing a new ProjectComment, the record must be associated with a `Project ID` and `User ID` record using   
 the `project_id:` and `user_id:` attribues.   
 
 ##### Attributes
@@ -156,7 +156,7 @@ the `project_id:` and `user_id:` attribues.
 
 ## Delivery
 
-When createing a new delivery, the record must be associated with a `Project ID`, and `User ID` reaord using   
+When createing a new delivery, the record must be associated with a `Project ID`, and `User ID` record using   
 the `project_id:` and `user_id:` attribues.
 
 
@@ -186,7 +186,7 @@ the `project_id:` and `user_id:` attribues.
 
 ## DeliveryComment
 
-When createing a new DeliveryComment, the record must be associated with a `Ddlivery ID` and `User ID` reaord using   
+When createing a new DeliveryComment, the record must be associated with a `Ddlivery ID` and `User ID` record using   
 the `delivery_id:` and `user_id:` attribues.   
 
 ##### Attributes
