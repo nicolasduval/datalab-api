@@ -85,8 +85,8 @@ CREATE TABLE companies (
     full_address character varying,
     zip_code character varying,
     phone_number character varying,
-    created_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:39 +0100'::character varying,
-    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:39 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying
 );
 
 
@@ -117,8 +117,8 @@ CREATE TABLE companies_users (
     id integer NOT NULL,
     user_id integer,
     company_id integer,
-    created_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying,
-    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:32 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:32 +0100'::character varying
 );
 
 
@@ -167,8 +167,8 @@ CREATE TABLE deliveries (
     delivery_method character varying,
     remarks text,
     checksum character varying,
-    created_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying,
-    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:32 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:32 +0100'::character varying
 );
 
 
@@ -192,6 +192,42 @@ ALTER SEQUENCE deliveries_id_seq OWNED BY deliveries.id;
 
 
 --
+-- Name: edls; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE edls (
+    id integer NOT NULL,
+    project_id integer,
+    user_id integer,
+    filename character varying,
+    content text,
+    created_at character varying DEFAULT 'Sat, 27 Feb 2016 13:15:54 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sat, 27 Feb 2016 13:15:54 +0100'::character varying,
+    frame_rate character varying,
+    md5 character varying
+);
+
+
+--
+-- Name: edls_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE edls_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: edls_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE edls_id_seq OWNED BY edls.id;
+
+
+--
 -- Name: projects; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -207,8 +243,8 @@ CREATE TABLE projects (
     sound_studio character varying,
     status character varying,
     company_id integer,
-    created_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:39 +0100'::character varying,
-    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:39 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying
 );
 
 
@@ -267,8 +303,8 @@ CREATE TABLE users (
     phone_number character varying,
     job_title character varying,
     tokens json,
-    created_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying,
-    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 19:12:40 +0100'::character varying
+    created_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying,
+    updated_at character varying DEFAULT 'Sun, 21 Feb 2016 18:59:31 +0100'::character varying
 );
 
 
@@ -323,6 +359,13 @@ ALTER TABLE ONLY deliveries ALTER COLUMN id SET DEFAULT nextval('deliveries_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY edls ALTER COLUMN id SET DEFAULT nextval('edls_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY projects ALTER COLUMN id SET DEFAULT nextval('projects_id_seq'::regclass);
 
 
@@ -363,6 +406,14 @@ ALTER TABLE ONLY companies_users
 
 ALTER TABLE ONLY deliveries
     ADD CONSTRAINT deliveries_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: edls_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY edls
+    ADD CONSTRAINT edls_pkey PRIMARY KEY (id);
 
 
 --
@@ -440,4 +491,10 @@ INSERT INTO schema_migrations (version) VALUES ('20160214232223');
 INSERT INTO schema_migrations (version) VALUES ('20160220102946');
 
 INSERT INTO schema_migrations (version) VALUES ('20160221022757');
+
+INSERT INTO schema_migrations (version) VALUES ('20160227121138');
+
+INSERT INTO schema_migrations (version) VALUES ('20160227160323');
+
+INSERT INTO schema_migrations (version) VALUES ('20160228100930');
 

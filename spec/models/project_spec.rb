@@ -20,6 +20,10 @@ RSpec.describe Project, type: :model do
       expect(@project).to have_many(:deliveries)
     end
 
+    it 'has many edls' do
+      expect(@project).to have_many(:edls)
+    end
+
   end
   
   describe "Attributes" do

@@ -4,7 +4,6 @@ module Api::V1::ResponceHelper
     return { error: args }
   end
 
-
   def respond_error(arg, status)
     render json: error(arg), status: status
   end

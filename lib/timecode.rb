@@ -63,13 +63,12 @@ class Timecode
     f = t[3].to_i
 
     frames = y + m + s + f
-    frames
 
   end
 
 
   def timecode(frames)
-    
+
     t = [ frames / (3600 * @fps), 
           frames / ( 60 * @fps ) % 60, 
           frames / @fps % 60, 

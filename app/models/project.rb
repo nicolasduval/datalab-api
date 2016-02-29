@@ -5,5 +5,6 @@ class Project < ActiveRecord::Base
   validates  :name, presence: :true, uniqueness: { scope: :company, message: 'Project alredy exist.' }
   belongs_to :company
   has_many   :deliveries
+  has_many   :edls
 
 end

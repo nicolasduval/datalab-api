@@ -19,14 +19,19 @@ Rails.application.routes.draw do
       end
       
       resources :projects do
-        get 'deliveries' => 'projects#deliveries'
+        get 'deliveries'       => 'projects#deliveries'
       end
       
       resources :deliveries do 
         get "created_by" => "deliveries#created_by"
       end
 
-      # Timecode
+      get "edls/:project_id/metadatas" => "edls#metadatas"
+      resources :edls do 
+        get "metadata"  => "edls#metadata"
+        get "parse"     => "edls#parse"
+      end
+
       scope :timecode do 
         post 'to_frames'   => 'timecode#to_frames'
         post 'to_timecode' => 'timecode#to_timecode'

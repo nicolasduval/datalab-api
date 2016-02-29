@@ -53,7 +53,6 @@ module Api
         respond_data(@project.deliveries, 200)
       end
 
-
       private
 
       def projects_params

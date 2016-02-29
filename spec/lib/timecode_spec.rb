@@ -44,6 +44,24 @@ describe("Timecode") do
 
   end
 
+  describe('30 based timecode') do 
+
+    let(:timecode) { Timecode.new(30) }
+
+    it '30 integer init fps' do
+      expect(timecode.fps).to eq 30
+    end
+
+    it 'timecode to frames' do
+      expect( timecode.frames('00:03:53:08') ).to eq 6998
+    end
+
+    it 'frames to timecode' do
+      expect(timecode.timecode(6990)).to eq '00:03:53:00'
+    end
+
+  end
+
   describe 'Extend object class' do
     
     let(:timecode) { Timecode.new(24) }
