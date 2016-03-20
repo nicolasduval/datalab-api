@@ -20,24 +20,16 @@ module DatalabApi
     # config.i18n.default_locale = :de
     config.active_record.schema_format = :sql
     config.autoload_paths << Rails.root.join('lib')
-    
-    config.middleware.insert_before 0, "Rack::Cors", :debug => true, :logger => (-> { Rails.logger }) do
+
+    config.middleware.insert_before 0, 'Rack::Cors' do
       allow do
         origins '*'
-
-        resource '/cors',
-          :headers => :any,
-          :methods => [:post],
-          :credentials => true,
-          :max_age => 0
-
         resource '*',
           :headers => :any,
-          :methods => [:get, :post, :delete, :put, :patch, :options, :head],
-          :max_age => 0
+          :expose  => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+          :methods => [:get, :post, :options, :delete, :put]
       end
     end
-
 
   end
 end
