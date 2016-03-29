@@ -4,7 +4,7 @@ module Api
     class ProjectsController < Api::BaseController
      
       before_action :authenticate_user!
-      # before_action :restrict_api_access
+      before_action :restrict_api_access
       before_action :find_project, only: [:show, :update, :destroy]
       before_action :find_project_id, only: [:companies, :deliveries]
 
